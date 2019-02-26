@@ -1,0 +1,120 @@
+﻿<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Display map navigation controls</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body {
+            margin: 0;
+            padding: 100px;
+            padding-right: 30em;
+            padding-top: 40em;
+            /*margin: 0;
+            padding: 200px;*/
+           
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 200px;
+            width: 500px;
+            height: 400px;
+            frameborder="0"
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <p style="text-align:left;">We're always searching the ways to get latest music for you. Follow us and send us your letter to feedback@mbank.com<br /></p>
+        @*<p style="text-align:right;"><h2>Follow Us On Social Media</h2></p>*@
+    </div>
+    <div id='map'></div>
+
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <h3>Contact Details</h3>
+            <p>
+               No(126) 165 street
+                <br>Tarmwe Township, Yangon
+                <br>
+            </p>
+            <p>
+                <abbr title="Phone">Phone</abbr>: 09778864099
+            </p>
+            <p>
+                <abbr title="Email">Email</abbr>:
+                <a href="mailto:mbank255@gmail.com">
+                    mbank255@gmail.com
+                </a>
+            </p>
+            <p>
+                <abbr title="Hours">H</abbr>: Monday - Friday: 9:00 AM to 5:00 PM
+            </p>
+        </div>
+
+        <!-- /.row -->
+        <!-- Contact Form -->
+        <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+        <div class="row">
+            <div class="col-lg-8 mb-4">
+                <h3>Send us a Message</h3>
+                <form name="sentMessage" id="contactForm" novalidate>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Full Name:</label>
+                            <input type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name.">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Email Address:</label>
+                            <input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address.">
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Message:</label>
+                            <textarea rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
+                        </div>
+                    </div>
+                    <div id="success"></div>
+                    <!-- For success/fail messages -->
+                    <head>
+                        <script type="text/javascript">
+
+   function sayHello()
+ {             alert("Thank You For Your Message!");     }
+
+                        </script>
+                    </head>
+                    <button type="submit" class="btn btn-primary" onclick="sayHello()" id="sendMessageButton">Send Message</button>
+                </form>
+            </div>
+        </div>
+        </div>
+        <!-- /.row -->
+        <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoiYWthcmluYWluZyIsImEiOiJjanNhaW1hcG0wMDVhNDRteXhkdTVmOHYxIn0.wyi5GGoyxQssUsEB052ZUw';
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v9',
+                center: [96.17678881945278, 16.806613841491256],
+                zoom: 9
+            });
+            var popup = new mapboxgl.Popup({ offset: 25 })
+            .setText("MBank");
+
+            var marker = new mapboxgl.Marker()
+    .setLngLat([96.17678881945278, 16.806613841491256])
+                 .setPopup(popup)
+    .addTo(map);
+            map.addControl(new mapboxgl.NavigationControl());
+        </script>
+</body>
+</html>
