@@ -239,8 +239,10 @@
       <DependentUpon>Assignment.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AudioController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CollectsController.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
@@ -286,29 +288,46 @@
     <Content Include="Content\overwrite.css" />
     <Content Include="Content\owl.carousel.css" />
     <Content Include="Content\style.css" />
+    <Content Include="EXO-interview-SCREENSHOT-2017-billboard-1548-1.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="picture\1-necklace.png" />
     <Content Include="picture\53c3853f25274a3d.jpg" />
+    <Content Include="picture\60811a.jpeg" />
     <Content Include="picture\64bff1eec38e92a4.jpg" />
     <Content Include="picture\7429806.jpg" />
-    <Content Include="picture\army_kpop_oil_floral_coffee_mug-r8a05f43ceb5b4d8aba21197b1bc1474d_x7jg9_8byvr_540.jpg" />
+    <Content Include="picture\Amazon.jpg" />
+    <Content Include="picture\cb1bda07b2379b0697950eabc666d75e8afab76a.jpg" />
+    <Content Include="picture\coffee.jpg" />
     <Content Include="picture\envelop.png" />
+    <Content Include="picture\EXO-interview-SCREENSHOT-2017-billboard-1548.jpg" />
     <Content Include="picture\fancybox_loading.gif" />
     <Content Include="picture\fancybox_overlay.png" />
     <Content Include="picture\fancybox_sprite.png" />
+    <Content Include="picture\fds.jpg" />
     <Content Include="picture\fghg.jpg" />
     <Content Include="picture\fhgjhk.jpg" />
+    <Content Include="picture\flat,550x550,075,f.u2.jpg" />
     <Content Include="picture\gjbhkl.jpg" />
     <Content Include="picture\gvhbj.jpg" />
+    <Content Include="picture\i-wanna-dance-with-somebody-whitney-houston.jpg" />
     <Content Include="picture\images.jpg" />
+    <Content Include="picture\kfc-01.gif" />
     <Content Include="picture\kpop_mug-rf594567eb0f6474abe035a187e8816e3_kfpim_307.jpg" />
     <Content Include="picture\location-icon.png" />
     <Content Include="picture\logo.gif" />
     <Content Include="picture\maxresdefault-2_1024x1024%402x.jpg" />
+    <Content Include="picture\My_MP3_Code%281%29.png" />
+    <Content Include="picture\My_MP3_Code%282%29.png" />
+    <Content Include="picture\My_MP3_Code%283%29.png" />
+    <Content Include="picture\My_MP3_Code%284%29.png" />
+    <Content Include="picture\My_MP3_Code%285%29.png" />
+    <Content Include="picture\My_MP3_Code.png" />
     <Content Include="picture\s-l300.jpg" />
+    <Content Include="picture\sfg.jpg" />
+    <Content Include="picture\Strike.jpg" />
     <Content Include="picture\Womens Accessories Cheap - Superdry Dewberry Montana Backpack Black Pink Ditsy Floral - OZ1055 1055_LRG.jpg" />
     <Content Include="picture\youpop-kpop-bts-album-army-bangtan-boys-chokers.jpg" />
     <Content Include="Readme.txt" />
@@ -396,6 +415,8 @@
     <Content Include="Views\Collects\Details.cshtml" />
     <Content Include="Views\Collects\Edit.cshtml" />
     <Content Include="Views\Collects\Index.cshtml" />
+    <Content Include="Views\Audio\Index.cshtml" />
+    <Content Include="Views\Help\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

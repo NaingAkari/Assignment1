@@ -1,155 +1,739 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-* {box-sizing: border-box}
-body {font-family: Verdana, sans-serif; margin:0}
-.mySlides {display: none}
-img {vertical-align: middle;}
-
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
+﻿@{
+    ViewBag.Title = "Home Page";
 }
 
-/* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" id="bootstrap-css" media="all" />
+<script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/style/StyleSheet.css" />
 
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
 
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
 
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">*@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+@*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>*@
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+<style>
+    .fade-carousel {
+        position: relative;
+        height: 400px;
+    }
 
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
+        .fade-carousel .carousel-inner .item {
+            height: 400px;
+        }
 
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
+        .fade-carousel .carousel-indicators > li {
+            margin: 3px 2px;
+            background-color: #f39c12;
+            border-color: #f39c12;
+            opacity: .7;
+        }
 
-.active, .dot:hover {
-  background-color: #717171;
-}
+            .fade-carousel .carousel-indicators > li.active {
+                width: 10px;
+                height: 10px;
+                opacity: 1;
+            }
 
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
+    .hero {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 3;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 0 rgba(0,0,0,.75);
+        -webkit-transform: translate3d(-50%,-50%,0);
+        -moz-transform: translate3d(-50%,-50%,0);
+        -ms-transform: translate3d(-50%,-50%,0);
+        -o-transform: translate3d(-50%,-50%,0);
+        transform: translate3d(-50%,-50%,0);
+    }
 
-    </style>
-</head>
-<body>
+        .hero h1 {
+            font-size: 4em;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+        }
 
-    <div class="slideshow-container">
+    .fade-carousel .carousel-inner .item .hero {
+        opacity: 0;
+        -webkit-transition: 2s all ease-in-out .1s;
+        -moz-transition: 2s all ease-in-out .1s;
+        /*-ms-transition: 2s all ease-in-out .1s;*/
+        -o-transition: 2s all ease-in-out .1s;
+        transition: 2s all ease-in-out .1s;
+    }
 
-        <div class="mySlides fade">
-            <div class="numbertext">1 / 3</div>
-            <img src="~/picture/64bff1eec38e92a4.jpg" style="width:100%">
-            <div class="text">Caption Text</div>
+    .fade-carousel .carousel-inner .item.active .hero {
+        opacity: 1;
+        -webkit-transition: 2s all ease-in-out .1s;
+        -moz-transition: 2s all ease-in-out .1s;
+        /*-ms-transition: 2s all ease-in-out .1s;*/
+        -o-transition: 2s all ease-in-out .1s;
+        transition: 2s all ease-in-out .1s;
+    }
+
+    /********************************/
+    /*            Overlay           */
+    /********************************/
+    .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        /*background-color: ;*/
+        opacity: .7;
+    }
+
+    /********************************/
+    /*          Custom Buttons      */
+    /********************************/
+    .btn.btn-lg {
+        padding: 10px 40px;
+    }
+
+    .btn.btn-hero,
+    .btn.btn-hero:hover,
+    .btn.btn-hero:focus {
+        color: #FFE4C4;
+        /*background-color: #1abc9c;*/
+        border-color: #0000FF;
+        outline: none;
+        margin: 20px auto;
+    }
+
+    /********************************/
+    /*       Slides backgrounds     */
+    /********************************/
+    .fade-carousel .slides .slide-1,
+    .fade-carousel .slides .slide-2,
+    .fade-carousel .slides .slide-3 {
+        width: 1400px;
+        height: 400px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .fade-carousel .slides .slide-1 {
+        background-image: url(https://cdn.londonandpartners.com/-/media/images/london/visit/general-london/music.jpg?mw=1920&amp;hash=02D08AF51C420DF79BE842258C85BA1C09F16305);
+    }
+
+    .fade-carousel .slides .slide-2 {
+        background-image: url(https://uploads.disquscdn.com/images/c432b35bba1b3832353ffd9d9bd11c0871ae7e866742bfb50c1e4c009ee16f30.jpg?w=800&amp;h=555);
+    }
+
+    .fade-carousel .slides .slide-3 {
+        background-image: url(https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/3/2018/03/03103805/big-concert-audience-listening-to-music-at-festival-picture-id485343244.jpg);
+    }
+
+
+
+
+    .dash-box {
+        position: relative;
+        background: rgba(226, 132, 255, 0.66);
+        background: -moz-linear-gradient(top, rgba(226, 132, 255, 0.66) 0%, rgba(0, 0, 0, .4) 100%);
+        background: -webkit-linear-gradient(top, rgba(226, 132, 255, 0.66) 0%, rgba(0, 0, 0, .4) 100%);
+        background: linear-gradient(to bottom, rgba(226, 132, 255, 0.66) 0%, rgba(0, 0, 0, .4) 100%);
+        /*filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ff5641', endColorstr='#fd3261', GradientType=0);*/
+        border-radius: 4px;
+        text-align: center;
+        margin: 60px 30px 30px;
+    }
+
+    .dash-box-icon {
+        position: absolute;
+        transform: translateY(-50%) translateX(-50%);
+        left: 50%;
+    }
+
+    .dash-box-action {
+        transform: translateY(-50%) translateX(-50%);
+        position: absolute;
+        left: 50%;
+    }
+
+    .dash-box-body {
+        padding: 50px 20px;
+    }
+
+    .dash-box-icon:after {
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        background: rgba(247, 148, 137, 0.91);
+        content: '';
+        border-radius: 50%;
+        left: -10px;
+        top: -10px;
+        z-index: -1;
+    }
+
+    .dash-box-icon > i {
+        background: #ff5444;
+        border-radius: 50%;
+        line-height: 40px;
+        color: #FFF;
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+    }
+
+    .dash-box-icon:before {
+        width: 75px;
+        height: 75px;
+        position: absolute;
+        background: rgba(253, 162, 153, 0.34);
+        content: '';
+        border-radius: 50%;
+        left: -17px;
+        top: -17px;
+        z-index: -2;
+    }
+
+    .dash-box-action > button {
+        border: none;
+        background: #FFF;
+        border-radius: 19px;
+        padding: 7px 16px;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 11px;
+        letter-spacing: .5px;
+        color: #003e85;
+        box-shadow: 0 3px 5px #d4d4d4;
+    }
+
+    .dash-box-body > .dash-box-count {
+        display: block;
+        font-size: 30px;
+        color: #FFF;
+        font-weight: 300;
+    }
+
+    .dash-box-body > .dash-box-title {
+        font-size: 13px;
+        color: rgba(226, 132, 255, 0.66);
+    }
+
+    .dash-box.dash-box-color-2 {
+        background: #FFE4C4;
+        background: -moz-linear-gradient(top, rgba(247, 148, 137, 0.91) 1%, rgba(248, 86, 72, 1) 99%);
+        background: -webkit-linear-gradient(top, rgba(247, 148, 137, 0.91) 1%, rgba(248, 86, 72, 1) 99%);
+        background: linear-gradient(to bottom, rgba(247, 148, 137, 0.91) 1%, rgba(248, 86, 72, 1) 99%);
+        /*filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#fcbe1b', endColorstr='#f85648', GradientType=0);*/
+    }
+
+    .dash-box-color-2 .dash-box-icon:after {
+        background: rgba(254, 224, 54, 0.81);
+    }
+
+    .dash-box-color-2 .dash-box-icon:before {
+        background: rgba(254, 224, 54, 0.64);
+    }
+
+    .dash-box-color-2 .dash-box-icon > i {
+        background: #fb9f28;
+    }
+
+    .dash-box.dash-box-color-3 {
+        background: #D3D3D3;
+        background: -moz-linear-gradient(top, rgba(183,71,247,1) 0%, rgba(108,83,220,1) 100%);
+        background: -webkit-linear-gradient(top, rgba(183,71,247,1) 0%,rgba(108,83,220,1) 100%);
+        background: linear-gradient(to bottom, rgba(183,71,247,1) 0%,rgba(108,83,220,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b747f7', endColorstr='#6c53dc',GradientType=0 );
+    }
+
+    .dash-box-color-3 .dash-box-icon:after {
+        background: rgba(226, 132, 255, 0.66);
+    }
+
+    .dash-box-color-3 .dash-box-icon:before {
+        background: rgba(226, 132, 255, 0.66);
+    }
+
+    .dash-box-color-3 .dash-box-icon > i {
+        background: #8150e4;
+    }
+
+    .dash-box.dash-box-color-4 {
+        background: rgb(255, 127, 98);
+        background: -moz-linear-gradient(top, rgba( 255,20,147 ) 0%, rgba(255, 127, 98) 100%);
+        background: -webkit-linear-gradient(top, rgba( 255,20,147 ) 0%,rgba(255, 127, 98) 100%);
+        background: linear-gradient(to bottom, rgba( 255,20,147 ) 0%,rgba(255, 127, 98) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b747f7', endColorstr='#6c53dc',GradientType=0 );
+    }
+
+    .dash-box-color-3 .dash-box-icon:after {
+        background: rgba(180, 70, 245, 0.76);
+    }
+
+    .dash-box-color-3 .dash-box-icon:before {
+        background: rgba(226, 132, 255, 0.66);
+    }
+
+    .dash-box-color-3 .dash-box-icon > i {
+        background: #8150e4;
+    }
+
+    .parent {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .column {
+        flex: 1 1 0px;
+        border: 1px solid black;
+    }
+
+    /*footer*/
+    body {
+        font-family: 'Signika', sans-serif;
+    }
+
+    .bg-grey {
+        background: #292929;
+    }
+
+    .logo-footer {
+        margin-bottom: 40px;
+    }
+
+    footer {
+        color: grey;
+    }
+
+        footer p, a {
+            font-size: 12px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        footer h6 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+            footer h6:after {
+                position: absolute;
+                content: "";
+                background: grey;
+                width: 12%;
+                height: 1px;
+                left: 0;
+                bottom: -20px;
+            }
+
+    .btn-footer {
+        color: Lavender;
+        text-decoration: none;
+        border: 1px solid;
+        border-radius: 43px;
+        font-size: 13px;
+        padding: 7px 30px;
+        line-height: 47px;
+    }
+
+        .btn-footer:hover {
+            text-decoration: none;
+        }
+
+    .form-footer input[type="text"] {
+        border: none;
+        border-radius: 16px 0 0 16px;
+        outline: none;
+        padding-left: 10px;
+    }
+
+    .placeholder {
+        font-size: 10px;
+        padding-left: 10px;
+        font-style: italic;
+    }
+
+    .form-footer input[type="button"] {
+        border: none;
+        background: #232323;
+        margin-left: -5px;
+        color: #fff;
+        outline: none;
+        border-radius: 0 16px 16px 0;
+        padding: 2px 12px;
+    }
+
+    .social .fa {
+        color: grey;
+        font-size: 22px;
+        padding: 10px 15px;
+        background: #3c3c3c;
+    }
+
+    footer ul li {
+        list-style: none;
+        display: block;
+    }
+
+    footer ul {
+        padding-left: 0;
+    }
+
+        footer ul li a {
+            text-decoration: none;
+            color: grey;
+            text-decoration: none;
+        }
+
+    a:hover {
+        text-decoration: none;
+        color: #f5f5f5 !important;
+    }
+
+    .logo-part {
+        border-right: 1px solid grey;
+        height: 100%;
+    }
+    /*-----------Donation Form---------------------*/
+    form_main {
+        width: 100%;
+    }
+
+    .form_main h4 {
+        font-family: roboto;
+        font-size: 20px;
+        font-weight: 300;
+        margin-bottom: 15px;
+        margin-top: 20px;
+        text-transform: uppercase;
+    }
+
+    .heading {
+        border-bottom: 1px solid #fcab0e;
+        padding-bottom: 9px;
+        position: relative;
+    }
+
+        .heading span {
+            background: #9e6600 none repeat scroll 0 0;
+            bottom: -2px;
+            height: 3px;
+            left: 0;
+            position: absolute;
+            width: 75px;
+        }
+
+    .form {
+        border-radius: 7px;
+        padding: 6px;
+    }
+
+    .txt[type="text"] {
+        border: 1px solid #ccc;
+        margin: 10px 0;
+        padding: 10px 0 10px 5px;
+        width: 100%;
+    }
+
+    .txt_3[type="text"] {
+        margin: 10px 0 0;
+        padding: 10px 0 10px 5px;
+        width: 100%;
+    }
+
+    .txt2[type="submit"] {
+        background: #242424 none repeat scroll 0 0;
+        border: 1px solid #4f5c04;
+        border-radius: 25px;
+        color: #fff;
+        font-size: 16px;
+        font-style: normal;
+        line-height: 35px;
+        margin: 10px 0;
+        padding: 0;
+        text-transform: uppercase;
+        width: 30%;
+    }
+
+    .txt2:hover {
+        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+        color: #5793ef;
+        transition: all 0.5s ease 0s;
+    }
+    /*----------Vactivities Card-------------*/
+    html {
+        font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font-size: 14px;
+    }
+
+    h5 {
+        font-size: 1.28571429em;
+        font-weight: 700;
+        line-height: 1.2857em;
+        margin: 0;
+    }
+
+    .card {
+        font-size: 1em;
+        overflow: hidden;
+        padding: 0;
+        border: none;
+        border-radius: .28571429rem;
+        box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+    }
+
+    .card-block {
+        font-size: 1em;
+        position: relative;
+        margin: 0;
+        padding: 1em;
+        border: none;
+        border-top: 1px solid rgba(34, 36, 38, .1);
+        box-shadow: none;
+    }
+
+    .card-img-top {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .card-title {
+        font-size: 1.28571429em;
+        font-weight: 700;
+        line-height: 1.2857em;
+    }
+
+    .card-text {
+        clear: both;
+        margin-top: .5em;
+        color: rgba(0, 0, 0, .68);
+    }
+
+    .card-footer {
+        font-size: 1em;
+        position: static;
+        top: 0;
+        left: 0;
+        max-width: 100%;
+        padding: .75em 1em;
+        color: rgba(0, 0, 0, .4);
+        border-top: 1px solid rgba(0, 0, 0, .05) !important;
+        background: #fff;
+    }
+
+    .card-inverse .btn {
+        border: 1px solid rgba(0, 0, 0, .05);
+    }
+
+    .profile {
+        position: absolute;
+        top: -12px;
+        display: inline-block;
+        overflow: hidden;
+        box-sizing: border-box;
+        width: 25px;
+        height: 25px;
+        margin: 0;
+        border: 1px solid #fff;
+        border-radius: 50%;
+    }
+
+    .profile-avatar {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+
+    .profile-inline {
+        position: relative;
+        top: 0;
+        display: inline-block;
+    }
+
+        .profile-inline ~ .card-title {
+            display: inline-block;
+            margin-left: 4px;
+            vertical-align: top;
+        }
+
+    .text-bold {
+        font-weight: 700;
+    }
+
+    .meta {
+        font-size: 1em;
+        color: rgba(0, 0, 0, .4);
+    }
+
+        .meta a {
+            text-decoration: none;
+            color: rgba(0, 0, 0, .4);
+        }
+
+            .meta a:hover {
+                color: rgba(0, 0, 0, .87);
+            }
+</style>
+<!------ Include the above in your HEAD tag ---------->
+<div style="background-color:LightCoral   ">
+    <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
+        <!-- Overlay -->
+        <div class="overlay"></div>
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#bs-carousel" data-slide-to="1"></li>
+            <li data-target="#bs-carousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item slides active">
+                <div class="slide-1"></div>
+                <div class="hero">
+                    <hgroup>
+                        <h1>MBank</h1>
+                        <h3>“Hear it ... See it... & Love it....Music is a knowledge of your soul” That bring magic LOVE to you !!</h3>
+                    </hgroup>
+                </div>
+            </div>
+            <div class="item slides">
+                <div class="slide-2"></div>
+                <div class="hero">
+                    <hgroup>
+                        <h1>Spread your Soul</h1>
+                        <h3>Follow your Feelings</h3>
+                    </hgroup>
+                </div>
+            </div>
+            <div class="item slides">
+                <div class="slide-3"></div>
+                <div class="hero">
+                    <hgroup>
+                        <h1>Collect your Loves with Us</h1>
+                        <h3>Click Our Shopping List</h3>
+                    </hgroup>
+                </div>
+            </div>
         </div>
-
-        <div class="mySlides fade">
-            <div class="numbertext">2 / 3</div>
-            <img src="~/picture/envelop.png" style="width:100%">
-            <div class="text">Caption Two</div>
-        </div>
-
-        <div class="mySlides fade">
-            <div class="numbertext">3 / 3</div>
-            <img src="~/picture/fghg.jpg" style="width:100%">
-            <div class="text">Caption Three</div>
-        </div>
-
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
     </div>
-    <br>
 
-    <div style="text-align:center">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
+    <div class="container" style="position:inherit;margin-right:30px">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="dash-box dash-box-color-4">
+                    <div class="dash-box-icon">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </div>
+                    <div class="dash-box-body">
+                        <span class="dash-box-count">Concert Calendar</span>
+                        <span class="dash-box-title">Stress out Places!!</span>
+                    </div>
+
+                    <div class="dash-box-action">
+                        <button ONCLICK="window.location.href='/Calendar/Index'">More Info</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="dash-box dash-box-color-3">
+                    <div class="dash-box-icon">
+                        <i class="glyphicon glyphicon-music"></i>
+                    </div>
+                    <div class="dash-box-body">
+                        <span class="dash-box-count">Musics</span>
+                        <span class="dash-box-title">Have Fun with Us!!</span>
+                    </div>
+
+                    <div class="dash-box-action">
+                        <button ONCLICK="window.location.href='/Audio/Index'">More Info</button>
+                        @*<button>More Info</button>*@
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="dash-box dash-box-color-2">
+                    <div class="dash-box-icon">
+                        <i class="glyphicon glyphicon-map-marker"></i>
+                    </div>
+                    <div class="dash-box-body">
+                        <span class="dash-box-count">Geolocation</span>
+                        <span class="dash-box-title">Connect With us</span>
+                    </div>
+
+                    <div class="dash-box-action">
+                        <button ONCLICK="window.location.href='/Collects/Create'">More Info</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
+</div>
 
-    <script>
-var slideIndex = 1;
-showSlides(slideIndex);
+<footer class="container-fluid bg-grey py-5" style="margin-top:20px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <div class="logo-part">
+                            <h3>My Charity</h3>
+                            @*<img src="https://i.ibb.co/sHZz13b/logo.png" class="w-50 logo-footer" style="width:50px">*@
+                            <p>7637 Laurel Dr. King Of Prussia, PA 19406</p>
+                            <p>Use this tool as test data for an automated system or find your next pen</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 px-4">
+                        <h6> About Company</h6>
+                        <p>
+                            Everyone can use Music Bank(MBank).Can listen music everywhere but need internet connection and  don't miss to Scan QR code!!.
+                           We small B2C online shop. But customers can only buy Idol’s accessories.
 
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
+                            They can sign in with Facebook or can sign up with new account.
 
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
+                            If the user is Myanmar’s singer fan I will add/show -up to date new of where they are making fan signing,
+                            where and when they will celebrate music festival and many news in extra web page.
+                            If the user’s Idol is from abroad I will announce when they are coming to Myanmar and where they are going.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6 px-4">
+                        <h6> Advertising</h6>
+                        <div class="row ">
+                            <div class="col-md-6">
+                                <img src="~/picture/cb1bda07b2379b0697950eabc666d75e8afab76a.jpg" width="120" height="80" /><br />
+                            </div>
+                            </div>
+                        </div>
 
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-}r
-    </script>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6 px-4">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <br /><br />
+                                        <img src="~/picture/kfc-01.gif" width="120" height="120" />
+                                    </div>
+                            </div>
+                        </div>
+                  
 
-</body>
-</html> 
+                </div>
+        </div>
+</footer>

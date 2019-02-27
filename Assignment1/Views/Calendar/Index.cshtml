@@ -84,7 +84,21 @@
                         $('#MyModal #pDetail').empty().html($description);
 
                         $('#MyModal').modal();
-                }
+                },
+
+                    selecttable: true,
+                    select: function (start, end) {
+                        selectedEvent = {
+                            eventID : 0,
+                            title: '',
+                            description: '',
+                            start: start,
+                            end: end,
+                            allDay: false,
+                            color:''
+                        }
+                    }
+
                 })
             }
         })

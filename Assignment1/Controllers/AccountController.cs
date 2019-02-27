@@ -327,20 +327,9 @@ namespace Assignment1.Controllers
             {
                 return RedirectToAction("Login");
             }
-           
+
             // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
-            var name = loginInfo.DefaultUserName;
-            var cookie = new HttpCookie("username", name);
-            if (cookie == null)
-            {
-                return RedirectToAction("Login");
-            }
-            else
-            {
-                Response.Cookies.Add(cookie);
-            }
-
             switch (result)
             {
                 case SignInStatus.Success:
@@ -357,7 +346,6 @@ namespace Assignment1.Controllers
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
-
         //
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
